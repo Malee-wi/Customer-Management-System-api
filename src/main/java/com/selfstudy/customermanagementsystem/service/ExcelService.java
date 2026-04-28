@@ -41,12 +41,17 @@ public class ExcelService {
                 customer.setNic(getStringValue(row, 2));
 
 
-                if (repo.existsByNic(customer.getNic())) {
-                    System.out.println("Skipping duplicate entry for NIC: " + customer.getNic());
-                    continue;
-                }
+                repo.findByNic(customer.getNic()).ifPresentOrElse(existingCustomer -> {
 
-                batch.add(customer);
+                    existingCustomer.setName(customer.getName());
+                    existingCustomer.setDob(customer.getDob());
+
+                    batch.add(existingCustomer);
+
+                }, () -> {
+
+                    batch.add(customer);
+                });
 
 
                 if (batch.size() == BATCH_SIZE) {
