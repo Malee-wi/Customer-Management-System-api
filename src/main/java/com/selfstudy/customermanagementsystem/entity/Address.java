@@ -1,9 +1,6 @@
 package com.selfstudy.customermanagementsystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -21,5 +18,6 @@ public class Address {
     private String country;
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 }
