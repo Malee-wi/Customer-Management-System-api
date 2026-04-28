@@ -1,11 +1,13 @@
 package com.selfstudy.customermanagementsystem.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 public class Customer {
 
     @Id
